@@ -7,6 +7,7 @@ export function NewPostForm() {
             {/* <ProfileImage src="#url" /> */}
             <textarea className="flex-grow resize-none overflow-hidden p-4 text-lg outline-none" placeholder="something to share?"/>
         </div>
-        <Button>Post</Button>
-        </form>);
+        <Button className="self-end">Post</Button>
+        </form>
+    );
 }
