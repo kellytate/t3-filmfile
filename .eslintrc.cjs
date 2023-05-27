@@ -9,13 +9,13 @@ const config = {
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
       ],
 
-      // rules: {
-      //   "@typescript-eslint/no-unsafe-member-access": "off",
-      //   "@typescript-eslint/no-unsafe-argument": "off",
-      //   "@typescript-eslint/no-unsafe-assignment": "off",
-      //   "@typescript-eslint/restrict-plus-operands": "off",
+      rules: {
+        "@typescript-eslint/no-unsafe-member-access": "off",
+        "@typescript-eslint/no-unsafe-argument": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/restrict-plus-operands": "off",
 
-      // },
+      },
       files: ["*.ts", "*.tsx"],
       parserOptions: {
         project: path.join(__dirname, "tsconfig.json"),
