@@ -16,9 +16,27 @@ const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> =
 ({ 
     id,
  }) => {
-    const { data: profile } = api.profile.getById.useQuery({ id })
-    const posts = api.post.infiniteProfileFeed.useInfiniteQuery({ userId: id},
-        { getNextPageParam: (lastPage) => lastPage.nextCursor})
+    const { data: profile } = api.profile.getById.useQuery({ id });
+    const posts = api.post.infiniteProfileFeed.useInfiniteQuery(
+        { userId: id},
+        { getNextPageParam: (lastPage) => lastPage.nextCursor}
+    );
+    const trpcUtils = api.useContext()
+    const toggleFollow = api.profile.toggleFollow.useMutation({ onSuccess: ({
+        addedFollow }) => {
+            trpcUtils.profile.getById.setData({ id }, oldData => {
+                if (oldData == null) return
+
+                const countModifier = addedFollow ? 1 : -1
+                return {
+                    ...oldData,
+                    isFollowing: addedFollow,
+                    followersCount: oldData.followersCount + countModifier,
+                };
+            });
+        }
+    })
+
 
 
     if (profile == null || profile.name == null) {
@@ -47,10 +65,11 @@ const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> =
                 </div>
             </div>
             <FollowButton 
-                isFollowing={profile.isFollowing} 
+                isFollowing={profile.isFollowing}
+                isLoading={toggleFollow.isLoading}
                 userId={id} 
-                onClick={() => null }/>
-        </header>
+                onClick={() => toggleFollow.mutate({ userId: id }) }/>
+        </header> 
         <main>
             <InfinitePostList
                 posts={posts.data?.pages.flatMap((page) => page.posts)} 
@@ -65,11 +84,13 @@ const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> =
 
 function FollowButton({ 
     userId, 
-    isFollowing, 
+    isFollowing,
+    isLoading,
     onClick,
  } : { 
     userId: string, 
-    isFollowing: boolean, 
+    isFollowing: boolean,
+    isLoading: boolean, 
     onClick: () => void;
 }) {
     const session = useSession()
@@ -78,7 +99,7 @@ function FollowButton({
         return null;
     }
 
-    return <Button onClick={onClick} small gray={isFollowing}>
+    return <Button disabled={isLoading} onClick={onClick} small gray={isFollowing}>
         {isFollowing ? "Unfollow" : "Follow"}
     </Button>;
 }
