@@ -54,8 +54,35 @@ function PostCard({
 }: Post) {
     const trpcUtils = api.useContext()
     const toggleLike = api.post.toggleLike.useMutation({ 
-        onSuccess: async ({ addedLike }) => {
-            await trpcUtils.post.infiniteFeed.invalidate();
+        onSuccess: ({ addedLike }) => {
+            const updateData: Parameters<typeof trpcUtils.post.infiniteFeed.
+            setInfiniteData>[1] = (oldData) => {
+                if (oldData == null) return
+
+                const countModifier = addedLike ? 1 : -1
+
+                return {
+                    ...oldData,
+                    pages: oldData.pages.map(page => {
+                        return {
+                            ...page,
+                            posts: page.posts.map(post => {
+                                if (post.id === id) {
+                                    return {
+                                        ...post,
+                                        likeCount: post.likeCount + countModifier,
+                                        likedByMe: addedLike
+                                    }
+                                }
+
+                                return post
+                            })
+                        }
+                    })
+                }
+            }
+
+            trpcUtils.post.infiniteFeed.setInfiniteData({}, updateData);
         },
     });
 
