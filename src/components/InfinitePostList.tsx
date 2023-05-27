@@ -1,4 +1,6 @@
+import Link from "next/link";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { ProfileImage } from "./ProfileImage";
 
 type Post = {
     id: string
@@ -14,7 +16,7 @@ type InfinitePostListProps = {
     isError: boolean,
     hasMore: boolean,
     fetchNewPosts: () => Promise<unknown>
-    posts?: Post[]
+    posts?: Post[ ]
 }
 
 export function InfinitePostList({ posts, isError, isLoading, hasMore, fetchNewPosts }: InfinitePostListProps) {
@@ -30,8 +32,34 @@ export function InfinitePostList({ posts, isError, isLoading, hasMore, fetchNewP
         hasMore={hasMore}
         loader={"Loading..."}>
             {posts.map(post => {
-                return <div key={post.id}>{post.content}</div>
+                return <PostCard key={post.id} {...post} />
             })}
         </InfiniteScroll>
     </ul>
+}
+
+const dateTimeFormatter = new Intl.DateTimeFormat(undefined, { dateStyle: "short" })
+
+function PostCard({ id, user, content, createdAt, likeCount, likedByMe }: Post) {
+    return (
+        <li className="flex gap-4 border-b px-4 py-4">
+            <Link href={`/profiles/${user.id}`}>
+                <ProfileImage src={user.image} />
+            </Link>
+            <div className="flex flex-grow flex-col">
+                <div className="flex gap-1">
+                    <Link
+                        href={`/profiles/${user.id}`}
+                        className="font-bold hover:underline focus-visible:underline
+                        outline-none"
+                    >
+                        {user.name}
+                    </Link>
+                    <span className="text-gray-500">-</span>
+                    <span className="text-gray-500">{dateTimeFormatter.format(createdAt)}</span>
+
+                </div>
+            </div>
+        </li>
+    );
 }
