@@ -4,6 +4,7 @@ import { ProfileImage } from "./ProfileImage";
 import { VscHeart, VscHeartFilled } from "react-icons/vsc"
 import { useSession } from "next-auth/react";
 import { IconHoverEffect } from "./IconHoverEffect";
+import { api } from "~/utils/api";
 
 type Post = {
     id: string
@@ -43,7 +44,25 @@ export function InfinitePostList({ posts, isError, isLoading, hasMore, fetchNewP
 
 const dateTimeFormatter = new Intl.DateTimeFormat(undefined, { dateStyle: "short" })
 
-function PostCard({ id, user, content, createdAt, likeCount, likedByMe }: Post) {
+function PostCard({ 
+    id,
+    user, 
+    content, 
+    createdAt, 
+    likeCount, 
+    likedByMe, 
+}: Post) {
+    const trpcUtils = api.useContext()
+    const toggleLike = api.post.toggleLike.useMutation({ 
+        onSuccess: async ({ addedLike }) => {
+            await trpcUtils.post.infiniteFeed.invalidate();
+        },
+    });
+
+    function handleToggleLike() {
+        toggleLike.mutate({ id })
+    }
+
     return (
         <li className="flex gap-4 border-b px-4 py-4">
             <Link href={`/profiles/${user.id}`}>
@@ -62,7 +81,7 @@ function PostCard({ id, user, content, createdAt, likeCount, likedByMe }: Post) 
                     <span className="text-gray-500">{dateTimeFormatter.format(createdAt)}</span>
                 </div>
                 <p className="whitespace-pre-wrap">{content}</p>
-                <HeartButton likedByMe={likedByMe} likeCount={likeCount}/>
+                <HeartButton onClick={handleToggleLike} isLoading={toggleLike.isLoading} likedByMe={likedByMe} likeCount={likeCount}/>
             </div>
 
         </li>
@@ -70,11 +89,13 @@ function PostCard({ id, user, content, createdAt, likeCount, likedByMe }: Post) 
 }
 
 type HeartButtonProps = {
+    onClick: () => void,
+    isLoading: boolean,
     likedByMe: boolean;
     likeCount: number;
 }
 
-function HeartButton({ likedByMe, likeCount }: HeartButtonProps) {
+function HeartButton({ likedByMe, likeCount, isLoading, onClick }: HeartButtonProps) {
 
     const session = useSession()
     const HeartIcon = likedByMe ? VscHeartFilled : VscHeart
@@ -88,7 +109,10 @@ function HeartButton({ likedByMe, likeCount }: HeartButtonProps) {
         )
     }
     return (
-        <button className={`group -ml-2 flex items-center gap-1 self-start transition-colors
+        <button 
+        disabled={isLoading}
+        onClick={onClick}
+        className={`group -ml-2 flex items-center gap-1 self-start transition-colors
         duration-200 ${
             likedByMe 
             ? "text-red-500"
