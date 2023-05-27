@@ -27,6 +27,7 @@ model Post {
     likes Like[]
 
     @@index([userId])
+    @@unique([createdAt, id])
 }
 
 model Like {
