@@ -1,6 +1,7 @@
 import Link from "next/link";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ProfileImage } from "./ProfileImage";
+import { PostImage } from "./PostImage";
 import { VscHeart, VscHeartFilled } from "react-icons/vsc"
 import { useSession } from "next-auth/react";
 import { IconHoverEffect } from "./IconHoverEffect";
@@ -43,6 +44,8 @@ export function InfinitePostList({
         loader={<LoadingSpinner />}
         >
             {posts.map(post => {
+                                // console.log(post)
+
                 return <PostCard key={post.id} {...post} />
             })}
         </InfiniteScroll>
@@ -116,7 +119,9 @@ function PostCard({
                     <span className="text-gray-500">-</span>
                     <span className="text-gray-500">{dateTimeFormatter.format(createdAt)}</span>
                 </div>
-                <p className="whitespace-pre-wrap">{content}</p>
+                {content?.startsWith("https://res.cloudinary.com") ? (<PostImage src={content}/>) : (<p className="whitespace-pre-wrap">{content}</p>)}
+                
+                
                 <HeartButton onClick={handleToggleLike} isLoading={toggleLike.isLoading} likedByMe={likedByMe} likeCount={likeCount}/>
             </div>
 
