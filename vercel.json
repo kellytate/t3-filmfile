@@ -1,8 +1,10 @@
 {
-    "git": {
-        "deploymentEnabled": {
-        "main": true,
-        "development": false
-        }
+  "git": {
+    "deploymentEnabled": {
+      "main": true,
+      "development": false,
+      "cloudinary-image-upload": false,
+      "cloudinary-integration": false
     }
+  }
 }
