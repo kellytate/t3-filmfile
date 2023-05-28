@@ -47,7 +47,7 @@ const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> =
         <Head>
             <title>{`${profile.name}`}</title>
         </Head>
-        <header className="sticky top-0 z-10 flex items-center border border-zinc-800 bg-white px-4 py-2">
+        <header className="sticky top-0 z-10 flex items-center border-b-4 bg-black border-zinc-700 px-4 py-2">
             <Link href=".." className="mr-2">
                 <IconHoverEffect>
                     <VscArrowLeft className="h-6 2-6" />
