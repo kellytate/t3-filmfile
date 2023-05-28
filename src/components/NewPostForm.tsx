@@ -103,7 +103,7 @@ function Form() {
     // }
     
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col gap-2 border-b px-4 py-2">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2 border border-zinc-800 px-4 py-2">
             <div className="flex gap-4">
             <ProfileImage src={session.data.user.image} />
             <textarea
@@ -111,7 +111,7 @@ function Form() {
             style={{ height: 0 }}
             value={inputValue}
             onChange={e => setInputValue(e.target.value)}
-            className="flex-grow resize-none overflow-hidden p-4 text-lg outline-none" placeholder="something to share?"/>
+            className="bg-zinc-800 flex-grow resize-none overflow-hidden p-4 text-lg outline-none" placeholder="something to share?"/>
         </div>
         <Button className="self-end">Post</Button>
         <div>

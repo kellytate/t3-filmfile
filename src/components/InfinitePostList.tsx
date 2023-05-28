@@ -103,7 +103,7 @@ function PostCard({
     }
 
     return (
-        <li className="flex gap-4 border-b px-4 py-4">
+        <li className="flex gap-4 border border-zinc-800 px-4 py-4">
             <Link href={`/profiles/${user.id}`}>
                 <ProfileImage src={user.image} />
             </Link>
