@@ -48,7 +48,6 @@ model Post {
 model Like {
   userId          String
   postId          String
-  imageId         String?
   user            User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   post            Post            @relation(fields: [postId], references: [id], onDelete: Cascade)
 
