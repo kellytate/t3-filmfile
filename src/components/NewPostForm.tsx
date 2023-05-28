@@ -4,6 +4,8 @@ import { type FormEvent } from "react";
 import { api } from "~/utils/api";
 import { Button } from "./Button";
 import { ProfileImage } from "./ProfileImage";
+import { CldUploadButton } from 'next-cloudinary';
+
 
 function updateTextAreaSize(textArea?: HTMLTextAreaElement) {
     if (textArea == null) return
@@ -21,6 +23,7 @@ export function NewPostForm() {
 function Form() {
     const session = useSession();
     const [inputValue, setInputValue] = useState("");
+    const [imageUrls, setImageUrls] = useState<string[]>([]); // ["https://res.cloudinary.com/dq7l8216n/image/upload/v1634170000/next-cloudinary
     const textAreaRef = useRef<HTMLTextAreaElement>();
     const inputRef = useCallback((textArea: HTMLTextAreaElement) => 
     {
@@ -77,6 +80,12 @@ function Form() {
         createPost.mutate({ content: inputValue })
     }
     
+    function handleUpload(url: string) {
+        console.log(url)
+        setImageUrls((prev) => [...prev, url])
+        createPost.mutate({ content: inputValue, images: [url] })
+    }
+    
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-2 border-b px-4 py-2">
             <div className="flex gap-4">
@@ -89,6 +98,7 @@ function Form() {
             className="flex-grow resize-none overflow-hidden p-4 text-lg outline-none" placeholder="something to share?"/>
         </div>
         <Button className="self-end">Post</Button>
+        <CldUploadButton onUpload={handleUpload} uploadPreset="uploads" />
         </form>
     );
 }
