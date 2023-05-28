@@ -38,25 +38,10 @@ model Post {
   userId          String
   content         String
   createdAt       DateTime        @default(now())
-
   user            User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   likes           Like[]
-  images          Image[]
 
   @@index([userId])
-  @@unique([createdAt, id])
-}
-
-model Image {
-  id              String          @id @default(uuid())
-  postId          String
-  url             String
-  createdAt       DateTime        @default(now())
-
-  post            Post            @relation(fields: [postId], references: [id], onDelete: Cascade)
-  likes           Like[]
-
-  @@index([postId])
   @@unique([createdAt, id])
 }
 
@@ -66,12 +51,10 @@ model Like {
   imageId         String?
   user            User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   post            Post            @relation(fields: [postId], references: [id], onDelete: Cascade)
-  image           Image?          @relation(fields: [imageId], references: [id], onDelete: Cascade)
 
   @@id([userId, postId])
   @@index([userId])
   @@index([postId])
-  @@index([imageId])
 }
 
 model Account {
