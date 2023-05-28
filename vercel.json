@@ -4,7 +4,8 @@
       "main": true,
       "development": false,
       "cloudinary-image-upload": false,
-      "cloudinary-integration": false
+      "cloudinary-integration": false,
+      "image-url-as-content": false
     }
   }
 }
