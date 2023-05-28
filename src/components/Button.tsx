@@ -14,10 +14,10 @@ export function Button({
 }: ButtonProps) {
     const sizeClasses = small ? "px-2 py-1" : "px-4 py-2 font-bold"
     const colorClasses = gray 
-        ? "bg-gray-400 hover: bg-gray-300 focus-visible:bg-gray-300"
-        : "bg-cyan-900 hover: bg-blue-400 focus-visible:bg-blue-400";
+        ? "bg-zinc-400 hover: bg-gray-300 focus-visible:bg-gray-300"
+        : "bg-zinc-950 hover: bg-blue-400 focus-visible:bg-blue-400";
 
-    return <button className={`rounded-full transition-colors duration-200 
+    return <button className={` border border-zinc-800 transition-colors duration-200 
     disabled:cursor-not-allowed disabled:opacity-50 text-white ${sizeClasses} 
     ${colorClasses} ${className}`} {...props}></button>;
 }
