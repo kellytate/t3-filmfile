@@ -25,8 +25,21 @@ model Post {
 
     user User @relation(fields: [userId], references: [id], onDelete: Cascade)
     likes Like[]
+    images Image[]
 
     @@index([userId])
+    @@unique([createdAt, id])
+}
+
+model Image {
+    id String @id @default(uuid())
+    postId String
+    url String
+    createdAt DateTime @default(now())
+
+    post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+    @@index([postId])
     @@unique([createdAt, id])
 }
 
