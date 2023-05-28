@@ -33,14 +33,17 @@ model Post {
 
 model Image {
     id String @id @default(uuid())
+    userId String
     postId String
     url String
     createdAt DateTime @default(now())
 
     post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@index([postId])
     @@unique([createdAt, id])
+    @@index([userId])
+    @@index([postId])
 }
 
 model Like {
@@ -98,6 +101,7 @@ model User {
     // Non-Next Auth
     posts         Post[]
     likes         Like[]
+    images        Image[]
     followers     User[] @relation(name: "Followers")
     follows       User[] @relation(name: "Followers")
 }
