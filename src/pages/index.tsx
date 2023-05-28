@@ -1,6 +1,5 @@
 import { type NextPage } from "next";
 import { useSession } from "next-auth/react";
-import { ThemeProvider } from "next-themes";
 import { useState } from "react";
 import { InfinitePostList } from "~/components/InfinitePostList";
 import { NewPostForm } from "~/components/NewPostForm";

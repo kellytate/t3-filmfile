@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { useSession } from "next-auth/react";
-import { useLayoutEffect, useRef, useState, useCallback, SetStateAction } from "react";
+import { useLayoutEffect, useRef, useState, useCallback } from "react";
 import { type FormEvent } from "react";
 import { api } from "~/utils/api";
 import { Button } from "./Button";
 import { ProfileImage } from "./ProfileImage";
 import { CldUploadButton } from 'next-cloudinary';
-import { info } from "console";
 
 
 function updateTextAreaSize(textArea?: HTMLTextAreaElement) {
@@ -25,9 +24,6 @@ export function NewPostForm() {
 function Form() {
     const session = useSession();
     const [inputValue, setInputValue] = useState("");
-
-    // const [info, updateInfo] = useState();
-    // const [error, updateError] = useState();
 
     const textAreaRef = useRef<HTMLTextAreaElement>();
     const inputRef = useCallback((textArea: HTMLTextAreaElement) => 
@@ -87,21 +83,11 @@ function Form() {
 
     function handleOnUpload(result: any) {
         
-        console.log(result?.info?.secure_url)
         setInputValue(result?.info?.secure_url)
-        // setInputValue(result?.info?.url);
-    
-    
         createPost.mutate({ content: result?.info?.secure_url })
-        // console.log("inputvalue" + inputValue)
-      }
+    }
     
-    // function handleUpload(url: string) {
-    //     console.log(url)
-    //     setInputValue(`${url}`)
-    //     createPost.mutate({ content: inputValue })
-    // }
-    
+
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-2 border border-zinc-800 px-4 py-2">
             <div className="flex gap-4">
@@ -115,8 +101,8 @@ function Form() {
         </div>
         <Button className="self-end">Post</Button>
         <div>
-        <CldUploadButton onUpload={handleOnUpload} uploadPreset="uploads" />
-          </div>
+            <CldUploadButton onUpload={handleOnUpload} uploadPreset="uploads" />
+        </div>
         </form>
     );
 }
