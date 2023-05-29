@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { useSession } from "next-auth/react";
-import { useLayoutEffect, useRef, useState, useCallback, SetStateAction } from "react";
+import { useLayoutEffect, useRef, useState, useCallback } from "react";
 import { type FormEvent } from "react";
 import { api } from "~/utils/api";
 import { Button } from "./Button";
 import { ProfileImage } from "./ProfileImage";
 import { CldUploadButton } from 'next-cloudinary';
-import { info } from "console";
 
 
 function updateTextAreaSize(textArea?: HTMLTextAreaElement) {
@@ -25,9 +24,6 @@ export function NewPostForm() {
 function Form() {
     const session = useSession();
     const [inputValue, setInputValue] = useState("");
-
-    // const [info, updateInfo] = useState();
-    // const [error, updateError] = useState();
 
     const textAreaRef = useRef<HTMLTextAreaElement>();
     const inputRef = useCallback((textArea: HTMLTextAreaElement) => 
@@ -87,23 +83,13 @@ function Form() {
 
     function handleOnUpload(result: any) {
         
-        console.log(result?.info?.secure_url)
         setInputValue(result?.info?.secure_url)
-        // setInputValue(result?.info?.url);
-    
-    
         createPost.mutate({ content: result?.info?.secure_url })
-        // console.log("inputvalue" + inputValue)
-      }
+    }
     
-    // function handleUpload(url: string) {
-    //     console.log(url)
-    //     setInputValue(`${url}`)
-    //     createPost.mutate({ content: inputValue })
-    // }
-    
+
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col gap-2 border border-zinc-800 px-4 py-2">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2 border border-stone-800 px-4 py-2">
             <div className="flex gap-4">
             <ProfileImage src={session.data.user.image} />
             <textarea
@@ -111,12 +97,14 @@ function Form() {
             style={{ height: 0 }}
             value={inputValue}
             onChange={e => setInputValue(e.target.value)}
-            className="bg-zinc-800 flex-grow resize-none overflow-hidden p-4 text-lg outline-none" placeholder="something to share?"/>
+            className="bg-stone-800 flex-grow resize-none overflow-hidden p-4 text-lg outline-none" placeholder="something to share?"/>
         </div>
+        <div className="gap-4 flex justify-end items-center">
+        <span className="border border-stone-800 p-2">
+            <CldUploadButton onUpload={handleOnUpload} uploadPreset="uploads"  />
+        </span>
         <Button className="self-end">Post</Button>
-        <div>
-        <CldUploadButton onUpload={handleOnUpload} uploadPreset="uploads" />
-          </div>
+        </div>
         </form>
     );
 }

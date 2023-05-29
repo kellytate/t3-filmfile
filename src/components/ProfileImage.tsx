@@ -8,7 +8,7 @@ type ProfileImageProps = {
 }
 export function ProfileImage({ src, className = ""}: ProfileImageProps) {
     return (
-    <div className={`relative h-12 w-12 overflow-hidden rounded-full 
+    <div className={`relative h-8 w-8 overflow-hidden rounded-full 
     ${className}`}>
         {src == null ? (
             <VscAccount className="w-full h-full" />

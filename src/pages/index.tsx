@@ -1,6 +1,5 @@
 import { type NextPage } from "next";
 import { useSession } from "next-auth/react";
-import { ThemeProvider } from "next-themes";
 import { useState } from "react";
 import { InfinitePostList } from "~/components/InfinitePostList";
 import { NewPostForm } from "~/components/NewPostForm";
@@ -13,7 +12,7 @@ const Home: NextPage = () => {
   const session = useSession()
   return <>
   
-  <header className=" bg-black sticky top-0 z-10 border border-zinc-800 pt-2">
+  <header className=" sticky dark:bg-black bg-white top-0 z-10 border border-stone-800 pt-2">
     <h1 className="mb-2 px-4 text-lg font-bold">Home</h1>
     {session.status === "authenticated" && (
       <div className="flex">
@@ -21,7 +20,7 @@ const Home: NextPage = () => {
           return (
             <button 
               key={tab} 
-              className={`flex-grow p-2 hover:bg-zinc-800 focus-visible:bg-gray-200 ${
+              className={`flex-grow p-2 hover:bg-stone-800 focus-visible:bg-gray-200 ${
                 tab === selectedTab 
                   ? "border-b-4 border-b-yellow-700 font-bold"
                   : ""
