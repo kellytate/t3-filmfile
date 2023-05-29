@@ -99,9 +99,11 @@ function Form() {
             onChange={e => setInputValue(e.target.value)}
             className="bg-stone-800 flex-grow resize-none overflow-hidden p-4 text-lg outline-none" placeholder="something to share?"/>
         </div>
+        <div className="gap-4 flex justify-end items-center">
+        <span className="border border-stone-800 p-2">
+            <CldUploadButton onUpload={handleOnUpload} uploadPreset="uploads"  />
+        </span>
         <Button className="self-end">Post</Button>
-        <div>
-            <CldUploadButton onUpload={handleOnUpload} uploadPreset="uploads" />
         </div>
         </form>
     );
