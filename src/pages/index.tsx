@@ -12,7 +12,7 @@ const Home: NextPage = () => {
   const session = useSession()
   return <>
   
-  <header className=" sticky dark:bg-black bg-white top-0 z-10 border border-stone-800 pt-2">
+  <header className=" sticky dark:bg-black bg-white top-0 z-10 border-b-stone-800 pt-2">
     <h1 className="mb-2 px-4 text-lg font-bold">Home</h1>
     {session.status === "authenticated" && (
       <div className="flex">
@@ -20,7 +20,7 @@ const Home: NextPage = () => {
           return (
             <button 
               key={tab} 
-              className={`flex-grow p-2 hover:bg-stone-800 focus-visible:bg-gray-200 ${
+              className={`flex-grow p-2 hover:bg-stone-200 dark:hover:bg-stone-800 focus-visible:bg-gray-200 ${
                 tab === selectedTab 
                   ? "border-b-4 border-b-yellow-700 font-bold"
                   : ""
