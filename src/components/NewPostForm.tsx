@@ -97,7 +97,7 @@ function Form() {
             style={{ height: 0 }}
             value={inputValue}
             onChange={e => setInputValue(e.target.value)}
-            className="bg-stone-800 flex-grow resize-none overflow-hidden p-4 text-lg outline-none" placeholder="something to share?"/>
+            className=" flex-grow resize-none overflow-hidden p-4 text-lg outline-none" placeholder="say something..."/>
         </div>
         <div className="gap-4 flex justify-end items-center">
         <span className="border border-stone-800 p-2">
