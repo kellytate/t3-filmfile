@@ -8,6 +8,6 @@ type IconHoverEffectProps = {
 export function IconHoverEffect ({ children, red = false }: IconHoverEffectProps) {
     const colorClasses = red 
     ? "outline-red-900 hover:bg-red-900 group-hover-bg-red-200 group-focus-visible:bg-red-900 focus-visible:bg-red-900" 
-    : "outline-gray-400 hover:bg-gray-200 group-hover-bg-gray-200 group-focus-visible:bg-gray-200 focus-visible:bg-gray-200"
-    return <div className={`rounded-full p-2 transition-colors duration-200 ${colorClasses}`}>{children}</div>
+    : "outline-stone-600 hover:bg-stone-600 group-hover-bg-stone-600 group-focus-visible:bg-stone-600 focus-visible:bg-stone-600"
+    return <div className={` p-2 transition-colors duration-200 ${colorClasses}`}>{children}</div>
 }

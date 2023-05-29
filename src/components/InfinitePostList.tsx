@@ -119,7 +119,7 @@ function PostCard({
                     <span className="text-gray-500">-</span>
                     <span className="text-gray-500">{dateTimeFormatter.format(createdAt)}</span>
                 </div>
-                {content?.startsWith("https://res.cloudinary.com") ? (<PostImage src={content}/>) : (<p className="whitespace-pre-wrap">{content}</p>)}
+                {content?.startsWith("https://res.cloudinary.com") ? (<div className="flex justify-center"><PostImage src={content}/></div>) : (<p className="whitespace-pre-wrap">{content}</p>)}
                 
                 
                 <HeartButton onClick={handleToggleLike} isLoading={toggleLike.isLoading} likedByMe={likedByMe} likeCount={likeCount}/>
