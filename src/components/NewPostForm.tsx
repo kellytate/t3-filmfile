@@ -24,6 +24,7 @@ export function NewPostForm() {
 function Form() {
     const session = useSession();
     const [inputValue, setInputValue] = useState("");
+    const [imageValue, setImageValue] = useState("");
 
     const textAreaRef = useRef<HTMLTextAreaElement>();
     const inputRef = useCallback((textArea: HTMLTextAreaElement) => 
@@ -78,13 +79,12 @@ function Form() {
     function handleSubmit(e: FormEvent) {
         e.preventDefault()
 
-        createPost.mutate({ content: inputValue })
+        createPost.mutate({ content: inputValue, image: imageValue})
     }
 
     function handleOnUpload(result: any) {
         
-        setInputValue(result?.info?.secure_url)
-        createPost.mutate({ content: result?.info?.secure_url })
+        setImageValue(result?.info?.secure_url)
     }
     
 
