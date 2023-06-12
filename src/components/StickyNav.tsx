@@ -4,12 +4,12 @@ import { IconHoverEffect } from "./IconHoverEffect";
 import { VscAccount, VscHome, VscSignIn, VscSignOut } from "react-icons/vsc";
 import ToggleButton from "./ToggleButton";
 
-export function SideNav () {
+export function StickyNav () {
     const session = useSession()
     const user = session.data?.user
 
-    return <nav className=" sticky top-0 px-2 py-4">
-        <ul className="flex flex-col items-start gap-2 whitespace-nowrap">
+    return <nav className="sticky bottom-0 px-2 py-4 bg-white dark:bg-neutral-950 justify-center">
+        <ul className="flex flex-row justify-center gap-2 whitespace-nowrap">
         <li>
                 <IconHoverEffect>
                     <span className="flex items-center gap-4">

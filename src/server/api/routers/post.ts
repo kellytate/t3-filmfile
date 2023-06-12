@@ -51,10 +51,10 @@ export const postRouter = createTRPCRouter({
     }),
 
   create: protectedProcedure
-    .input(z.object({ content: z.string() }))
-    .mutation(async ({ input: { content }, ctx }) => {
+    .input(z.object({ content: z.string().optional(), image: z.string().optional() }))
+    .mutation(async ({ input: { content, image }, ctx }) => {
       const post =  await ctx.prisma.post.create({ 
-        data: { content, userId: ctx.session.user.id },
+        data: { content, image, userId: ctx.session.user.id },
       });
 
       void ctx.revalidateSSG?.(`/profiles/${ctx.session.user.id}`)
@@ -99,6 +99,7 @@ export const postRouter = createTRPCRouter({
       select: {
         id: true,
         content: true,
+        image: true,
         createdAt: true,
         _count: { select: { likes: true}},
         likes: currentUserId == null ? false : { where: { userId: 
@@ -123,6 +124,7 @@ export const postRouter = createTRPCRouter({
       return {
         id: post.id,
         content: post.content,
+        image: post.image,
         createdAt: post.createdAt,
         likeCount: post._count.likes,
         user: post.user,

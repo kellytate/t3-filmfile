@@ -10,7 +10,8 @@ import { LoadingSpinner } from "./LoadingSpinner";
 
 type Post = {
     id: string
-    content: string
+    content: string | null
+    image: string | null
     createdAt: Date
     likeCount: number;
     likedByMe: boolean;
@@ -22,7 +23,7 @@ type InfinitePostListProps = {
     isError: boolean,
     hasMore: boolean | undefined,
     fetchNewPosts: () => Promise<unknown>
-    posts?: Post[ ]
+    posts?: Post[]
 }
 
 export function InfinitePostList({
@@ -38,6 +39,7 @@ export function InfinitePostList({
     }
     return <ul>
         <InfiniteScroll
+        className="dark:bg-neutral-950"
         dataLength={posts.length}
         next={fetchNewPosts}
         hasMore={hasMore}
@@ -57,10 +59,11 @@ const dateTimeFormatter = new Intl.DateTimeFormat(undefined, { dateStyle: "short
 function PostCard({ 
     id,
     user, 
-    content, 
+    content,
+    image, 
     createdAt, 
     likeCount, 
-    likedByMe, 
+    likedByMe,
 }: Post) {
     const trpcUtils = api.useContext()
     const toggleLike = api.post.toggleLike.useMutation({ 
@@ -103,12 +106,13 @@ function PostCard({
     }
 
     return (
-        <li className="flex gap-4 border dark:border-stone-800 px-4 py-4">
-            <Link href={`/profiles/${user.id}`}>
-                <ProfileImage src={user.image} />
-            </Link>
+        <li className="flex gap-4 border dark:border-stone-800 px-0 py-4">
+            
             <div className="flex flex-grow flex-col">
-                <div className="flex gap-1">
+                <div className="flex gap-1 px-2 py-4">
+                    <Link href={`/profiles/${user.id}`}>
+                        <ProfileImage src={user.image} />
+                    </Link>
                     <Link
                         href={`/profiles/${user.id}`}
                         className="font-bold hover:underline focus-visible:underline
@@ -119,10 +123,12 @@ function PostCard({
                     <span className="text-gray-500">-</span>
                     <span className="text-gray-500">{dateTimeFormatter.format(createdAt)}</span>
                 </div>
-                {content?.startsWith("https://res.cloudinary.com") ? (<div className="flex justify-center"><PostImage src={content}/></div>) : (<p className="whitespace-pre-wrap">{content}</p>)}
-                
-                
-                <HeartButton onClick={handleToggleLike} isLoading={toggleLike.isLoading} likedByMe={likedByMe} likeCount={likeCount}/>
+                {/* {content?.startsWith("https://res.cloudinary.com") ? (<div className="flex justify-center px-0"><PostImage src={content} /></div>) : (<p className="whitespace-pre-wrap">{content}</p>)} */}
+                <div className="flex justify-center px-0"><PostImage src={image}/></div>
+                <p className="whitespace-pre-wrap">{content}</p>
+                <div className="px-2">
+                    <HeartButton onClick={handleToggleLike} isLoading={toggleLike.isLoading} likedByMe={likedByMe} likeCount={likeCount}/>
+                </div>
             </div>
 
         </li>
