@@ -15,6 +15,7 @@ type Post = {
     createdAt: Date
     likeCount: number;
     likedByMe: boolean;
+    archived: boolean;
     user: { id: string; image: string | null; name: string | null };
 };
 
@@ -63,7 +64,8 @@ function PostCard({
     image, 
     createdAt, 
     likeCount, 
-    likedByMe, 
+    likedByMe,
+    archived, 
 }: Post) {
     const trpcUtils = api.useContext()
     const toggleLike = api.post.toggleLike.useMutation({ 
@@ -111,7 +113,7 @@ function PostCard({
             <div className="flex flex-grow flex-col">
                 <div className="flex gap-1 px-2 py-4">
                     <Link href={`/profiles/${user.id}`}>
-                        <ProfileImage src={user.image} className="h-auto w-auto" />
+                        <ProfileImage src={user.image} />
                     </Link>
                     <Link
                         href={`/profiles/${user.id}`}
