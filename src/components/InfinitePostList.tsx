@@ -10,8 +10,8 @@ import { LoadingSpinner } from "./LoadingSpinner";
 
 type Post = {
     id: string
-    content: string
-    image: string
+    content: string | null
+    image: string | null
     createdAt: Date
     likeCount: number;
     likedByMe: boolean;
@@ -23,7 +23,7 @@ type InfinitePostListProps = {
     isError: boolean,
     hasMore: boolean | undefined,
     fetchNewPosts: () => Promise<unknown>
-    posts?: Post[ ]
+    posts?: Post[]
 }
 
 export function InfinitePostList({
