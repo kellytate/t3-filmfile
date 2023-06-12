@@ -15,7 +15,6 @@ type Post = {
     createdAt: Date
     likeCount: number;
     likedByMe: boolean;
-    archived: boolean;
     user: { id: string; image: string | null; name: string | null };
 };
 
@@ -65,7 +64,6 @@ function PostCard({
     createdAt, 
     likeCount, 
     likedByMe,
-    archived, 
 }: Post) {
     const trpcUtils = api.useContext()
     const toggleLike = api.post.toggleLike.useMutation({ 
