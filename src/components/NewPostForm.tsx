@@ -5,6 +5,7 @@ import { type FormEvent } from "react";
 import { api } from "~/utils/api";
 import { Button } from "./Button";
 import { ProfileImage } from "./ProfileImage";
+import Image from "next/image"
 import { CldUploadButton } from 'next-cloudinary';
 
 
@@ -24,7 +25,17 @@ export function NewPostForm() {
 function Form() {
     const session = useSession();
     const [inputValue, setInputValue] = useState("");
-
+    const [imageValue, setImageValue] = useState("");
+    const ImagePreview = () => {
+        return (
+            <Image
+            src={imageValue}
+            alt="image to be uploaded"
+            width={50}
+            height={50}
+            ></Image>
+        )
+    }
     const textAreaRef = useRef<HTMLTextAreaElement>();
     const inputRef = useCallback((textArea: HTMLTextAreaElement) => 
     {
@@ -41,6 +52,7 @@ function Form() {
     const createPost = api.post.create.useMutation({ 
         onSuccess: (newPost) => {
         setInputValue("");
+        setImageValue("");
 
         if (session.status !== "authenticated") {
             return
@@ -78,13 +90,14 @@ function Form() {
     function handleSubmit(e: FormEvent) {
         e.preventDefault()
 
-        createPost.mutate({ content: inputValue })
+        createPost.mutate({ content: inputValue, image: imageValue})
     }
 
     function handleOnUpload(result: any) {
         
-        setInputValue(result?.info?.secure_url)
-        createPost.mutate({ content: result?.info?.secure_url })
+        setImageValue(result?.info?.secure_url)
+
+        // createPost.mutate({ image: imageValue })
     }
     
 
@@ -100,9 +113,10 @@ function Form() {
             className=" flex-grow resize-none overflow-hidden p-4 mb-4 text-lg outline-none dark:placeholder:text-stone-100 dark:bg-neutral-800" placeholder="say something..."/>
         </div>
         <div className="gap-4 flex justify-end items-center">
+        {imageValue ? (<div className="flex justify-center px-0"><ImagePreview/></div>) : (
         <span className="border border-stone-800 p-2 hover:border-stone-400">
             <CldUploadButton onUpload={handleOnUpload} uploadPreset="uploads"  />
-        </span>
+        </span>)}
         <Button className="self-end">Post</Button>
         </div>
         </form>

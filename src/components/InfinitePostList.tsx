@@ -11,6 +11,7 @@ import { LoadingSpinner } from "./LoadingSpinner";
 type Post = {
     id: string
     content: string
+    image: string
     createdAt: Date
     likeCount: number;
     likedByMe: boolean;
@@ -58,7 +59,8 @@ const dateTimeFormatter = new Intl.DateTimeFormat(undefined, { dateStyle: "short
 function PostCard({ 
     id,
     user, 
-    content, 
+    content,
+    image, 
     createdAt, 
     likeCount, 
     likedByMe, 
@@ -109,7 +111,7 @@ function PostCard({
             <div className="flex flex-grow flex-col">
                 <div className="flex gap-1 px-2 py-4">
                     <Link href={`/profiles/${user.id}`}>
-                        <ProfileImage src={user.image} />
+                        <ProfileImage src={user.image} className="h-auto w-auto" />
                     </Link>
                     <Link
                         href={`/profiles/${user.id}`}
@@ -121,8 +123,9 @@ function PostCard({
                     <span className="text-gray-500">-</span>
                     <span className="text-gray-500">{dateTimeFormatter.format(createdAt)}</span>
                 </div>
-                {content?.startsWith("https://res.cloudinary.com") ? (<div className="flex justify-center px-0"><PostImage src={content} /></div>) : (<p className="whitespace-pre-wrap">{content}</p>)}
-                
+                {/* {content?.startsWith("https://res.cloudinary.com") ? (<div className="flex justify-center px-0"><PostImage src={content} /></div>) : (<p className="whitespace-pre-wrap">{content}</p>)} */}
+                <div className="flex justify-center px-0"><PostImage src={image}/></div>
+                <p className="whitespace-pre-wrap">{content}</p>
                 <div className="px-2">
                     <HeartButton onClick={handleToggleLike} isLoading={toggleLike.isLoading} likedByMe={likedByMe} likeCount={likeCount}/>
                 </div>

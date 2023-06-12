@@ -5,7 +5,8 @@
       "development": false,
       "cloudinary-image-upload": false,
       "cloudinary-integration": false,
-      "image-url-as-content": false
+      "image-url-as-content": false,
+      "add-image-to-post": false
     }
   }
 }
