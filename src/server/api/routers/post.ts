@@ -101,6 +101,7 @@ export const postRouter = createTRPCRouter({
         content: true,
         image: true,
         createdAt: true,
+        archived: true,
         _count: { select: { likes: true}},
         likes: currentUserId == null ? false : { where: { userId: 
           currentUserId }},
@@ -126,6 +127,7 @@ export const postRouter = createTRPCRouter({
         content: post.content,
         image: post.image,
         createdAt: post.createdAt,
+        archived: post.archived,
         likeCount: post._count.likes,
         user: post.user,
         likedByMe: post.likes?.length > 0
