@@ -20,13 +20,14 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <meta name="description" content="This is a social app"/>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
-      <div className="container mx-auto flex">
-        <div className="min-h-screen w-full flex-grow border dark:border-stone-800">
-          <Component {...pageProps} />
+      <div className="container mx-auto flex flex-col">
+        <div className="container">
+          <div className="min-h-screen w-full flex-grow border dark:border-stone-800">
+            <Component {...pageProps} />
+          </div>
         </div>
+        <StickyNav />
       </div>
-      <StickyNav />
       </ThemeProvider>
     </SessionProvider>
   );
