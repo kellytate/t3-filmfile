@@ -106,9 +106,9 @@ function PostCard({
     }
 
     return (
-        <li className="flex gap-4 border dark:border-stone-800 px-0 py-4">
+        <li className={`flex w-full gap-4 border dark:border-stone-800 px-0 py-4 mr-0`}>
             
-            <div className="flex flex-grow flex-col">
+            <div className="flex flex-col w-full">
                 <div className="flex gap-1 px-2 py-4">
                     <Link href={`/profiles/${user.id}`}>
                         <ProfileImage src={user.image} />
@@ -124,8 +124,12 @@ function PostCard({
                     <span className="text-gray-500">{dateTimeFormatter.format(createdAt)}</span>
                 </div>
                 {/* {content?.startsWith("https://res.cloudinary.com") ? (<div className="flex justify-center px-0"><PostImage src={content} /></div>) : (<p className="whitespace-pre-wrap">{content}</p>)} */}
-                <div className="flex justify-center px-0"><PostImage src={image}/></div>
-                <p className="whitespace-pre-wrap">{content}</p>
+                { image ? (<div className="flex justify-center">
+                    <div className="flex px-0">
+                        <PostImage src={image}/>
+                    </div>
+                </div>) : <div></div> }        
+                { content ? (<div className="flex px-2 py-2"><p className="whitespace-pre-wrap">{content}</p></div>) : <div></div>}
                 <div className="px-2">
                     <HeartButton onClick={handleToggleLike} isLoading={toggleLike.isLoading} likedByMe={likedByMe} likeCount={likeCount}/>
                 </div>
