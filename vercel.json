@@ -6,7 +6,8 @@
       "cloudinary-image-upload": false,
       "cloudinary-integration": false,
       "image-url-as-content": false,
-      "add-image-to-post": false
+      "add-image-to-post": false,
+      "padding-for-content": false
     }
   }
 }

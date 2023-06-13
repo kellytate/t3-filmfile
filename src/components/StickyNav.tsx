@@ -8,7 +8,7 @@ export function StickyNav () {
     const session = useSession()
     const user = session.data?.user
 
-    return <nav className="sticky bottom-0 px-2 py-4 bg-white dark:bg-neutral-950 justify-center">
+    return <nav className="sticky bottom-0 px-2 py-4 bg-white dark:bg-neutral-950 justify-center w-full">
         <ul className="flex flex-row justify-center gap-2 whitespace-nowrap">
         <li>
                 <IconHoverEffect>
