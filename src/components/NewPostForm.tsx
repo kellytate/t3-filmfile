@@ -102,7 +102,7 @@ function Form() {
     
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col gap-2 border dark:border-stone-800 pt-6 pb-4 px-4 py-2">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2 border dark:bg-neutral-950 dark:border-stone-800 pt-6 pb-4 px-4 py-2">
             <div className="flex gap-4">
             <ProfileImage src={session.data.user.image} />
             <textarea
@@ -110,7 +110,7 @@ function Form() {
             style={{ height: 0 }}
             value={inputValue}
             onChange={e => setInputValue(e.target.value)}
-            className=" flex-grow resize-none overflow-hidden p-4 mb-4 text-lg outline-none dark:placeholder:text-stone-100 dark:bg-neutral-800" placeholder="say something..."/>
+            className=" flex-grow resize-none overflow-hidden p-4 mb-4 text-lg outline-none dark:placeholder:text-stone-100 dark:bg-neutral-950" placeholder="say something..."/>
         </div>
         <div className="gap-4 flex justify-end items-center">
         {imageValue ? (<div className="flex justify-center px-0"><ImagePreview/></div>) : (
