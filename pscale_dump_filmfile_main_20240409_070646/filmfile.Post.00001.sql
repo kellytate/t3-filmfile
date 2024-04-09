@@ -1,0 +1,17 @@
+INSERT INTO `Post`(`id`,`userId`,`content`,`createdAt`,`image`) VALUES
+("12b37bb7-73a2-424e-86f0-4ce582b38c66","cli5ha6a00000l5087smpnshj","","2023-08-29 13:50:37.085","https://res.cloudinary.com/dbhsn1hmv/image/upload/v1693317033/uploaded-images/cg6nupbyaq23e1d4p16n.jpg"),
+("1d1dac46-2272-46b8-8b2c-2dd214ba55b1","cli5ha6a00000l5087smpnshj","West Seattle","2023-09-25 23:33:17.890","https://res.cloudinary.com/dbhsn1hmv/image/upload/v1695684778/uploaded-images/j2f3kyf6bmhjbpoujwoc.jpg"),
+("2cce4779-bede-40fb-85c3-a48d0d084dd3","cli5ha6a00000l5087smpnshj","International District - Seattle, WA","2023-06-12 01:07:33.002","https://res.cloudinary.com/dbhsn1hmv/image/upload/v1686532021/uploaded-images/gfrezzelouffjep9joam.jpg"),
+("48bf3add-b30c-4863-86a2-3962a46daa92","cli5ha6a00000l5087smpnshj","","2023-07-06 15:58:13.829","https://res.cloudinary.com/dbhsn1hmv/image/upload/v1688659089/uploaded-images/fm7oz5qejh5pedgeozpz.jpg"),
+("536296e1-539b-4f1a-9bd4-ee97bbf84d18","cli5ha6a00000l5087smpnshj","","2023-11-08 04:46:26.215","https://res.cloudinary.com/dbhsn1hmv/image/upload/v1699418774/uploaded-images/tejwayisazxuc4sg1fgz.jpg"),
+("64a53af2-9525-423e-bf43-637d70341a70","cli5ha6a00000l5087smpnshj","","2023-07-17 17:18:50.196",""),
+("7970a3e7-74b7-4e9e-bc38-93cae2485dd5","cli5ha6a00000l5087smpnshj","West Seattle sunset in October.","2023-10-31 17:57:36.822","https://res.cloudinary.com/dbhsn1hmv/image/upload/v1698775038/uploaded-images/txh1tbjtrhvnexumjgxi.jpg"),
+("7da807e3-27e2-4d75-ae40-ad4ae372628b","cli5ha6a00000l5087smpnshj","","2023-08-22 12:22:18.397","https://res.cloudinary.com/dbhsn1hmv/image/upload/v1692706934/uploaded-images/tagocgn6rtihzs0drghv.jpg"),
+("7f382e06-8997-4b18-a8b7-0bd921adb42b","cli5ha6a00000l5087smpnshj","Seattle, WA","2023-08-29 13:56:00.542","https://res.cloudinary.com/dbhsn1hmv/image/upload/v1693317334/uploaded-images/qjrgu5glij3ryj2xei0c.jpg"),
+("8b29b2d4-eeb1-4198-9a74-42608e32eb34","cli5ha6a00000l5087smpnshj","","2023-09-11 15:50:58.934","https://res.cloudinary.com/dbhsn1hmv/image/upload/v1694447454/uploaded-images/jdumctg6yq2lca2jebmw.jpg"),
+("b11507cb-571d-412a-a626-7e131eb2c158","cli5ha6a00000l5087smpnshj","","2023-06-26 21:43:44.472","https://res.cloudinary.com/dbhsn1hmv/image/upload/v1687815816/uploaded-images/xzfyrkah4ouhfytkpynl.jpg"),
+("c7d9f5bd-4a54-4cde-aa10-3426a37484c0","cli5ha6a00000l5087smpnshj","From Seward Park - Seattle, WA","2023-06-12 01:36:25.415","https://res.cloudinary.com/dbhsn1hmv/image/upload/v1686533749/uploaded-images/sivsfdn4cbyq0rcl1u1b.jpg"),
+("d7a50f6c-de3f-4068-9379-d5ffde31bcbf","cli5ha6a00000l5087smpnshj","Can Can Theatre - Seattle, WA","2023-06-12 01:46:20.940","https://res.cloudinary.com/dbhsn1hmv/image/upload/v1686534317/uploaded-images/n6io151axgxgc2z8cklm.jpg"),
+("dc384c99-0217-48ae-865b-89a04451c618","cli5ha6a00000l5087smpnshj","","2023-07-17 17:18:39.452","https://res.cloudinary.com/dbhsn1hmv/image/upload/v1689614312/uploaded-images/fo672prfxkc6vg7lypev.jpg"),
+("e2bae493-90d6-4af0-beac-cbb8e6d6115b","cli5ha6a00000l5087smpnshj","","2023-06-24 14:50:41.056","https://res.cloudinary.com/dbhsn1hmv/image/upload/v1687618236/uploaded-images/djihepwfukvcsaksqja0.jpg"),
+("ec917c0b-577c-4736-bb63-ca91da07bdf4","cli5ha6a00000l5087smpnshj","","2023-11-09 15:26:38.265","https://res.cloudinary.com/dbhsn1hmv/image/upload/v1699543578/uploaded-images/zjypyqmvkregmz2cr00j.jpg");
